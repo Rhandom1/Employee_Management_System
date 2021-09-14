@@ -1,0 +1,23 @@
+{
+  "name": "employee_management_system",
+  "version": "1.0.0",
+  "description": "An app to manage employee databases built with Node and SQL",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rhandom1/Employee_Management_System.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rhandom1/Employee_Management_System/issues"
+  },
+  "homepage": "https://github.com/Rhandom1/Employee_Management_System#readme",
+  "dependencies": {
+    "inquirer": "^8.1.3"
+  }
+}
