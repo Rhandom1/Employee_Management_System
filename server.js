@@ -19,7 +19,7 @@ const trackEmp = [
 const deptQuestions = [
     {
         type: "input",
-        message: "What Department would you like to add?"
+        message: "What Department would you like to add?",
         name: "name"
     }
 ];
@@ -53,7 +53,7 @@ const employeeQuestions = [
     {
         type: "list",
         message: "Please, select the new employee's role:",
-        name: "role"
+        name: "role",
         choices: ["Sales", "Front-End Developer", "Back-End Developer", "Accounant", "Legal"]
     },
     {
