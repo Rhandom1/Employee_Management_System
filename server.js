@@ -1,10 +1,10 @@
 const inquirer = require("inquirer");
-const fs = require("fs");
+const mysql = require('mysql2');
+const cTable = require('console.table');
 
-const trackArray = [];
-const deptArray = [];
-const roleArray = [];
-const employeeArray = [];
+const db = require('./connection/database')
+
+
 
 const trackEmp = [
     {
@@ -63,14 +63,36 @@ const employeeQuestions = [
     }
 ];
 
+//Add name to deptartment table
+function addDept() {
+    inquirer.prompt(deptQuestions).then((response) => {
+        //Add to the department table?
+    })
+};
+
+//Add name, salary, and dept to role table
+function addRole() {
+    inquirer.prompt(roleQuestions). then((response) => {
+        //Add to the role table?
+    })
+}
+
+//Add first name, last name, role, and manager to employee db
+function addEmployee() {
+    inquirer.prompt(employeeQuestions).then((response) => {
+        //add new employee to employee table?
+    })
+}
 
 
-//Add Department
-    //Add name to db
+
+
+
+    
 
     //Add name, salary, and dept to role db
 //Add Employee
-    //Add first name, last name, role, and manager to employee db
+    
 //Update Employee
     //Show list of employees
         //Alter role or salary and update in db
