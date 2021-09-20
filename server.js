@@ -162,60 +162,59 @@ function viewEmployees() {
 };
 
 function updateEmp() {
-    db.query("SELECT * FROM employees", (err, empData) => {
+    db.query('SELECT * FROM employees', (err, empData) => {
         if (err) throw err
-           console.table(response);
-            promptUser();
+        console.log(empData);
+        promptUser();
     })
-    db.query("SELECT * FROM roles", (err, roleData) => {
+
+    db.query('SELECT * FROM roles', (err, roleData) => {
         if (err) throw err
-           console.table(response);
-            promptUser();
+        console.log(roleData);
+        promptUser();
     })
 
     const empList = empData.map(
-        (empNames) =>
-            `${empNames.id}: ${empNames.first_name} ${empNames.last_name}`
+        (empNames) => `${empNames.id}: ${empNames.first_name} ${empNames.last_name}`
     );
+
     const rolesList = roles.map((rolesData) => ({
         name: rolesData.title,
-        value: rolesData.is
+        value: rolesData.id
     }));
 
     inquirer.prompt([
         {
             type: "list",
             name: "empSelect",
-            message: "Which employee would you like to update?",
-            choices: empList,
+            message: "Please select an employee to update:",
+            choices: empList
         },
         {
             type: "list",
             name: "roleSelect",
-            message: "Assign the employee a new role:",
-            choices: rolesList,
+            message: "Select a enw role for the employee:",
+            choices: rolesList
         },
     ])
-
-    .then(updateResponse) => {
-        db.query(
-            'UPDATE employees SET role_id = ? WHERE id = ?',
-            [
-                updateResponse.roleSelect,
-                updateResponse.empSelect.split(": ")[0],
-            ],
-            (err, roles) => {
-                if (err) throw err
-                console.table(response);
-                promptUser();
-            },
-            console.log("Employee updated!")
-            )
-        );
+    .then((updateResponse) => {
+        db.query('UPDATE employees SET roles_id = ? WHERE id = ?',
+        [
+            updateResponse.roleSelect,
+            updateResponse.empSelect,
+        ],
+        (err, roles) => {
+            if (err) throw err
+            console.table(response);
+            promptUser();
+        },
+        console.log("Employee updated!")
+        )
         promptUser();
-        
-    }
+    })
+
 }
+
     //data.map
     
     
