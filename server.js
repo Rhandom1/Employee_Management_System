@@ -3,7 +3,6 @@ const mysql = require("mysql2");
 const cTable = require("console.table");
 
 const db = require("./connection/database");
-const { listenerCount } = require("./connection/database");
 
 const trackEmp = [
   {
@@ -83,18 +82,25 @@ function promptUser() {
     switch (response.table) {
       case "Add New Department":
         addDept();
+        break;
       case "Show All Departments":
         viewDept();
+        break;
       case "Add New Role":
         addRole();
+        break;
       case "Show All Roles":
         viewRoles();
+        break;
       case "Add New Employee":
         addEmployee;
+        break;
       case "Show All Employees":
         viewEmployees();
+        break;
       case "Update Employee Role":
         updateEmp();
+        break;
       case "Quit":
         quitApp();
     }
@@ -204,7 +210,7 @@ function updateEmp() {
         value: rolesData.id,
       }));
       inquirer
-        .prompt([
+.prompt([
           {
             type: "list",
             name: "empSelect",
