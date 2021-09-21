@@ -93,7 +93,7 @@ function promptUser() {
         viewRoles();
         break;
       case "Add New Employee":
-        addEmployee;
+        addEmployee();
         break;
       case "Show All Employees":
         viewEmployees();
