@@ -18,6 +18,7 @@ const trackEmp = [
       "Add New Role",
       "Add New Employee",
       "Update Employee Role",
+      "Quit"
     ],
   },
 ];
@@ -94,6 +95,8 @@ function promptUser() {
         viewEmployees();
       case "Update Employee Role":
         updateEmp();
+      case "Quit":
+        quitApp();
     }
   });
 }
@@ -217,19 +220,23 @@ function updateEmp() {
         ])
         .then((updateResponse) => {
           db.query(
-            "UPDATE employees SET roles_id = ? WHERE id = ?",
-            [updateResponse.roleSelect, updateResponse.empSelect],
+            "UPDATE employees SET role_id = ? WHERE id = ?",
+            [updateResponse.roleSelect, updateResponse.empSelect.split(":")[0]],
             (err, roles) => {
+              console.log(updateResponse);
               if (err) throw err;
-              console.table(response);
+              console.table(roles);
               promptUser();
             },
-            console.log("Employee updated!")
           );
-          promptUser();
         });
     });
   });
+};
+
+function quitApp() {
+  console.log("Goodbye!");
+  process.exit
 }
 //end updateEmp
 
