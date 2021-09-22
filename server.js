@@ -35,6 +35,11 @@ const deptQuestions = [
 const roleQuestions = [
   {
     type: "input",
+    message: "Which department will the new role be under?",
+    name: "department_id",
+  },
+  {
+    type: "input",
     message: "What role would you like to add?",
     name: "title",
   },
@@ -118,6 +123,7 @@ function addDept() {
       {
         //pass for the ?
         name: response.name,
+        id: response.id
       },
       (err) => {
         if (err) throw err;
@@ -138,7 +144,7 @@ function addRole() {
         //pass for the ?
         title: response.title,
         salary: response.salary,
-        
+        department_id: response.department_id
       },
       (err) => {
         if (err) throw err;
