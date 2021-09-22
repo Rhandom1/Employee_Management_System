@@ -138,6 +138,7 @@ function addRole() {
         //pass for the ?
         title: response.title,
         salary: response.salary,
+        
       },
       (err) => {
         if (err) throw err;
@@ -205,9 +206,9 @@ function updateEmp() {
     db.query("SELECT * FROM roles", (err, roleData) => {
       if (err) throw err;
 
-      rolesListPrompt = roleData.map((rolesData) => ({
-        name: rolesData.title,
-        value: rolesData.id,
+      rolesListPrompt = roleData.map((roleData) => ({
+        name: roleData.title,
+        value: roleData.id,
       }));
       inquirer
 .prompt([
