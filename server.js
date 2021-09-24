@@ -32,23 +32,23 @@ const deptQuestions = [
 ];
 
 //Add role
-const roleQuestions = [
-  {
-    type: "input",
-    message: "Which department will the new role be under?",
-    name: "department_id",
-  },
-  {
-    type: "input",
-    message: "What role would you like to add?",
-    name: "title",
-  },
-  {
-    type: "input",
-    message: "Please, enter a salary for this role:",
-    name: "salary",
-  },
-];
+// const roleQuestions = [
+//   {
+//     type: "input",
+//     message: "Which department will the new role be under?",
+//     name: "department_id",
+//   },
+//   {
+//     type: "input",
+//     message: "What role would you like to add?",
+//     name: "title",
+//   },
+//   {
+//     type: "input",
+//     message: "Please, enter a salary for this role:",
+//     name: "salary",
+//   },
+// ];
 
 //Add Employee
 const employeeQuestions = [
@@ -136,23 +136,46 @@ function addDept() {
 
 //Add name, salary, and dept to role table
 function addRole() {
-  inquirer.prompt(roleQuestions).then((response) => {
-    //Add to the role table?
-    db.query(
-      "INSERT INTO roles SET ?",
-      {
-        //pass for the ?
-        title: response.title,
-        salary: response.salary,
-        department_id: response.department_id
-      },
-      (err) => {
-        if (err) throw err;
-        console.log("Role has been added");
-        promptUser();
-      }
-    );
+   db.query("SELECT * FROM departments", (err, res) => {
+    //destructured the response
+    const allRoles = res.map(({id, name}) => ({
+      name: name,
+      value: id
+    }))
+    inquirer.prompt([{
+      type: "list",
+      message: "Which department will the new role be under?",
+      name: "department_id",
+      choices: allRoles
+    },
+    {
+      type: "input",
+      message: "What role would you like to add?",
+      name: "title",
+    },
+    {
+      type: "input",
+      message: "Please, enter a salary for this role:",
+      name: "salary",
+    },]).then((response) => {
+      //Add to the role table?
+      db.query(
+        "INSERT INTO roles SET ?",
+        {
+          //pass for the ?
+          title: response.title,
+          salary: response.salary,
+          department_id: response.department_id
+        },
+        (err) => {
+          if (err) throw err;
+          console.log("Role has been added");
+          promptUser();
+        }
+      );
+    });
   });
+  
 }
 
 //Add first name, last name, role, and manager to employee db
@@ -162,10 +185,10 @@ function addEmployee() {
     db.query(
       "INSERT INTO employees SET ?",
       {
-        firstName: response.firstName,
-        lastName: response.lastName,
-        role: response.role,
-        salary: response.salary,
+        //key: value pair
+        first_name: response.firstName,
+        last_name: response.lastName,
+        role_id: response.role,
       },
       (err) => {
         if (err) throw err;
